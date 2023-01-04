@@ -1,0 +1,106 @@
+<%- include("../userLayouts/header.ejs") %> <%-
+include("../userLayouts/partials/userheader.ejs") %>
+
+<!-- breadcrumb-section -->
+<div class="breadcrumb-section breadcrumb-bg">
+  <div class="container">
+    <div class="row">
+      <div class="col-lg-8 offset-lg-2 text-center">
+        <div class="breadcrumb-text">
+          <p>We sale fresh fruits</p>
+          <h1>Account</h1>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+<!-- end breadcrumb section -->
+
+<!-- new form  -->
+<div class="container rounded bg-white mt-5 mb-5">
+  <div class="row">
+      <div class="col-md-3 border rounded">
+          <div class="d-flex flex-column align-items-center text-center p-3 py-5"><img class="rounded-circle mt-5" width="150px" src="https://i.stack.imgur.com/3bDms.png?s=192&g=1">
+          <span class="text-black-50"> <%= user.name %></span><span> <%= user.email %></span>
+          <a href="/login"><span class="font-weight-bold">Profile </span></a>
+
+          <a href="/myorders"><span class="font-weight-bold">My orders </span></a>
+          </div>
+          <a
+                    style=" text-decoration: none ; color: red;"
+                    class="mobile-hide search-bar-icon"
+                    href="/logout"
+                    ><h5 style=" text-decoration: none ; color: red;">logout</h5>
+                    <i
+                      class="fa fa-sign-out <%=path==='/logout'?'current-list-item active': ''%>"
+                    ></i
+                  ></a>
+      </div>
+      <div class="col-md-5">
+          <div class="p-3 py-5">
+              <div class="d-flex justify-content-between align-items-center mb-3">
+                  <h4 class="text-right">Profile </h4>
+              </div>
+              <form action="/editProfile" method="post">
+              <div class="row mt-2">
+                  <div class="col-md-12"><label class="labels">Name</label><input  type="text" class="form-control"  value="<%= user.name %>"></div>
+              </div>
+              <div class="row mt-3">
+                  <div class="col-md-12"><label class="labels">Mobile Number</label><input name="phonenumber" type="tel" class="form-control" value="<%= user.tel %>" ></div>
+                  <div class="col-md-12"><label class="labels">Email ID</label><input name="email" type="email" class="form-control" value="<%= user.email %>"></div>
+                  <div class="col-md-12"><label class="labels">Address</label><input name="address" type="text" class="form-control" value="<%= user.address %>"></div>
+                
+              </div>
+              <div class="mt-5 "><input class="btn btn-primary profile-button  "  type="submit" value="Save Profile"></div>
+      
+          </div>
+      </div>
+      <div class="col-md-4">
+          <div class="p-3 py-5">
+              <div class="d-flex justify-content-center align-items-center experience"><span></span><span class="border  p-1 add-experience"></span></div><br>
+              <div class="col-md-12"><label class="labels"></label><div class="myorders">
+                  <div class="col-md-12"><label class="labels">City</label><input name="city" type="text" class="form-control" value="<%= user.city %>"></div>
+                  <div class="col-md-12"><label class="labels">State</label><input name="state" type="text" class="form-control" value="<%= user.state %>"></div>
+                  <div class="col-md-12"><label class="labels">Postcode</label><input name="zip" type="tel" class="form-control" value="<%= user.zip %>"></div>
+                  <div class="col-md-12"><label class="labels">Country</label><input name="country" type="text" class="form-control" value="<%= user.country %>"></div>
+              </form>
+               </div> <br>
+              <div class="col-md-12"><label class="labels"></label></div>
+          </div>
+      </div>
+  </div>
+</div>
+</div>
+</div>
+<!-- End new form  -->
+
+<!-- logo carousel -->
+<div class="logo-carousel-section">
+  <div class="container">
+    <div class="row">
+      <div class="col-lg-12">
+        <div class="logo-carousel-inner">
+          <div class="single-logo-item">
+            <img src="assets/img/company-logos/1.png" alt="" />
+          </div>
+          <div class="single-logo-item">
+            <img src="assets/img/company-logos/2.png" alt="" />
+          </div>
+          <div class="single-logo-item">
+            <img src="assets/img/company-logos/3.png" alt="" />
+          </div>
+          <div class="single-logo-item">
+            <img src="assets/img/company-logos/4.png" alt="" />
+          </div>
+          <div class="single-logo-item">
+            <img src="assets/img/company-logos/5.png" alt="" />
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+<!-- end logo carousel -->
+
+<%- include("../userLayouts/partials/userfooter.ejs") %> <%-
+include("../userLayouts/footer.ejs") %>

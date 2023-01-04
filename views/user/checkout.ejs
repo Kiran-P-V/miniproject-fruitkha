@@ -1,0 +1,365 @@
+<%- include("../userLayouts/header.ejs") %> <%-
+include("../userLayouts/partials/userheader.ejs") %>
+
+<!-- breadcrumb-section -->
+<div class="breadcrumb-section breadcrumb-bg">
+<div class="container">
+  <div class="row">
+    <div class="col-lg-8 offset-lg-2 text-center">
+      <div class="breadcrumb-text">
+        <p>Fresh and Organic</p>
+        <h1>Check Out Product</h1>
+      </div>
+    </div>
+  </div>
+</div>
+</div>
+<!-- end breadcrumb section -->
+
+<!-- check out section -->
+<div class="checkout-section mt-150 mb-150">
+  <div class="container">
+    <div class="row">
+      <div class="col-lg-8">
+        <div class="checkout-accordion-wrap">
+          <div class="accordion" id="accordionExample">
+            <div class="card single-accordion">
+              <div class="card-header" id="headingOne">
+                <h5 class="mb-0">
+                  <button
+                    class="btn btn-link"
+                    type="button"
+                    data-toggle="collapse"
+                    data-target="#collapseOne"
+                    aria-expanded="true"
+                    aria-controls="collapseOne"
+                  >
+                    Billing Address
+                  </button>
+                </h5>
+              </div>
+              <div
+                id="collapseOne"
+                class="collapse show"
+                aria-labelledby="headingOne"
+                data-parent="#accordionExample"
+               >
+               <div class="card-body">
+                 <div class="billing-address-form">
+                   <!-- new form updateeee -->
+
+
+            <div class="container">
+              <div class="row justify-content-center">
+                <div class="col-xl-8 ftco-animate">
+                              <form action="/placeOrder" class="billing-form" id="billingform" method="post">
+                        <div class="row align-items-end">
+                          <div class="col-md-12">
+                            <div class="form-group mt-4">
+                                                <div class="radio border p-3 pb-1" style="border-radius: 8px; line-height:1.2px;">
+                                               
+                                                  <label><input type="radio" name="currentAddress" value="currentAddress"> Ship to current address</label>
+                                                    <p class="mt-2"><%= user.name %></p>
+                                                    <p ><%= user.address %>, <%= user.city %>,<%= user.state %>,<%= user.country %>,<%= user.zip %></p>
+                                                    <p>Mob:<%= user.tel %></p><span>Email: <%= user.email %></span>
+                                                   
+                                                </div>
+                                            </div>
+                        </div>
+                            <div class="col-md-12">
+                             <div class="form-group">
+                               <h4 class="ms-2">Add new address</h4>
+          
+                               <label for="firstname">Name</label>
+                                <input type="text" class="form-control" placeholder="" name="name">
+                                </div>
+                                 </div>
+                        
+                      <div class="w-100"></div>
+                          <div class="col-md-12">
+                              <div class="form-group">
+                                  <label for="country">Country</label>
+                                  <div class="select-wrap">
+                                <div class="icon"><span class="ion-ios-arrow-down"></span></div>
+                                <select name="country" id="" class="form-control">
+                                  <option value="India">India</option>
+                                </select>
+                              </div>
+                              </div>
+                          </div>
+                          <input type="hidden" id="payment" name="payment" value="">
+                          <div class="w-100"></div>
+                          <div class="col-md-6">
+                              <div class="form-group">
+                              <label for="streetaddress">Street Address</label>
+                            <input type="text" class="form-control" name="address" placeholder="House number and street name">
+                          </div>
+                          </div>
+                          <div class="col-md-6">
+                              <div class="form-group">
+                                <label for="">State</label>
+                            <input type="text" class="form-control" placeholder="" name="state">
+                          </div>
+                          </div>
+                          <div class="w-100"></div>
+                          <div class="col-md-6">
+                              <div class="form-group">
+                              <label for="towncity">Town / City</label>
+                            <input type="text" class="form-control" placeholder="" name="city">
+                          </div>
+                          </div>
+                          <div class="col-md-6">
+                              <div class="form-group">
+                                  <label for="postcodezip">Postcode / ZIP *</label>
+                            <input type="text" class="form-control" placeholder="" name="zip">
+                          </div>
+                          </div>
+                          <div class="w-100"></div>
+                          <div class="col-md-6">
+                          <div class="form-group">
+                            <input type="hidden" name="savedAddress" value="" id="current">
+                              <label for="phone">Phone</label>
+                            <input type="text" class="form-control" placeholder="" name="phone">
+                          </div>
+                        </div>
+                        <div class="col-md-6">
+                          <div class="form-group">
+                              <label for="emailaddress">Email Address</label>
+                            <input type="text" class="form-control" placeholder="" name="email">
+                         
+                          
+                          </div>
+                      </div>
+                      <div class="w-100"></div>
+                     
+                      </div>
+                     
+                    </form>
+                </div>
+                </div>
+              </div>
+              <!-- new form update   -->
+                   
+                  </div>
+                </div>
+              </div>
+            </div>
+            <div class="card single-accordion">
+              <div class="card-header" id="headingTwo">
+                <h5 class="mb-0">
+                  <button
+                    class="btn btn-link collapsed"
+                    type="button"
+                    data-toggle="collapse"
+                    data-target="#collapseTwo"
+                    aria-expanded="false"
+                    aria-controls="collapseTwo"
+                  >
+                  Coupon 
+                  </button>
+                </h5>
+              </div>
+              <div
+                id="collapseTwo"
+                class="collapse"
+                aria-labelledby="headingTwo"
+                data-parent="#accordionExample"
+              >
+                <div class="card-body">
+                  <div class="shipping-address-form">
+                    <div class="col-md-6 d-flex">
+                      <div class="cart-detail cart-total bg-light p-3 p-md-4">
+                          <h3 class="billing-heading mb-4">Apply coupon</h3>
+                          <p class="d-flex">
+                                    <span>Subtotal</span>
+                                    <span> &#8377;<%=  cartProduct.totalPrice %>.00</span>
+                                </p>
+                                <p class="d-flex">
+                                    <span>Delivery</span> 
+                                    <span>&#8377;45.00</span>
+                                </p>
+                                <% //if(coupon[0].status==1){ %>
+                                <%// if(coupons.length >0){ %>
+                                <p>
+                                   
+                                    <span>Apply coupons</span>
+                                    <form action="/checkCoupon" method="post">
+                                          <div class="d-flex flex-column">
+                                            <input type="hidden" id="hidden" name="value" value="">
+                                            <input type="hidden" name="total" value="<%=  cartProduct.totalPrice %>">
+                                        <%// coupons.forEach(x=>{ %> 
+                                            <div>
+                                                 
+                                            <input type="radio" name="coupon"  value="<%//=x.value %>"
+                                            
+                                            >
+                                          
+                                            
+                                        </div>
+                                            <%// } )%> 
+
+                                            <input type="text" class="form-control" placeholder="" name="coupon">
+                                            <span><input type="submit" id="btnradio" value="Apply"></span>
+                                    </div>
+                                    </form>
+                                </p>
+                                <%// } %>
+                                <%//} else{ %>
+                                    <!-- <p class="text-success">Coupon applied </p> -->
+                                    <%//} %>
+                                <hr>
+                                <p class="d-flex total-price">
+                                    <span>Total</span>
+                                    <% if(afterPrice == 0){%>
+                                    <span> &#8377;<%=  cartProduct.totalPrice +45  %> .00</span>
+                                    <% } else {%>
+                                        <span><%=  cartProduct.totalPrice +45 - afterPrice %></span>
+                                        <%} %>
+                                </p>
+                                </div>
+                  </div>                 
+                 </div>
+                </div>
+              </div>
+            </div>
+            <div class="card single-accordion">
+              <div class="card-header" id="headingThree">
+                <h5 class="mb-0">
+                  <button
+                    class="btn btn-link collapsed"
+                    type="button"
+                    data-toggle="collapse"
+                    data-target="#collapseThree"
+                    aria-expanded="false"
+                    aria-controls="collapseThree"
+                  >
+                  Payment
+                  </button>
+                </h5>
+              </div>
+              <div
+                id="collapseThree"
+                class="collapse"
+                aria-labelledby="headingThree"
+                data-parent="#accordionExample"
+              >
+                <div class="card-body">
+                  <div class="card-details">
+                    <div class="col-md-6">
+                      <div class="cart-detail bg-light p-3 p-md-4">
+                          <h3 class="billing-heading mb-4">Payment Method</h3>
+                                    <div class="form-group">
+                                        <div class="col-md-12">
+                                            <div class="radio">
+                                               <label><input type="radio"name="optradio" class="mr-2" value="Cash on delivery"> Cash on Delivery</label>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="form-group">
+                                        <div class="col-md-12">
+                                            <div class="radio">
+                                               <label><input type="radio" name="optradio" class="mr-2" value="Razorpay">Razor Pay</label>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="form-group">
+                                        <div class="col-md-12">
+                                            <div class="radio">
+                                               <label><input type="radio" name="optradio" class="mr-2" value="Paypal"> Paypal</label>
+                                               
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <% if(typeof message !== 'undefined'){%>
+                    
+                                      <p class="mt-1 ps-2  text-danger" ><%= message %></p>
+                                       
+                                     <%}%>
+                                    <input type="submit" form="billingform" class="btn btn-primary py-3 px-4" value="Place an order" >
+                                </div>
+                  </div>                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <div class="col-lg-4">
+        <div class="order-details-wrap">
+          <table class="order-details">
+            <thead>
+              <tr>
+                <th>Your order Details</th>
+                <th>Price</th>
+              </tr>
+            </thead>
+            <tbody class="order-details-body">
+              <tr>
+                <td>Product</td>
+                <td>Total</td>
+              </tr>
+							<% cartProduct.item.forEach(x=>{  %>
+              <tr>
+                <td><%=x.productId.product %></td>
+                <td>Rs.<%=x.productId.productprize %></td>
+              </tr>
+									<% }) %>
+            </tbody>
+            <tbody class="checkout-details">
+              <tr>
+                <td>Subtotal</td>
+                <td>Rs.<%=totalPrice %></td>
+              </tr>
+              <tr>
+                <td>Shipping</td>
+                <td>Rs.45</td>
+              </tr>
+              <tr>
+                <td>Total</td>
+                <td>Rs.<%=totalPrice+45 %></td>
+              </tr>
+            </tbody>
+          </table>
+          <!-- <a href="/placeOrder" class="boxed-btn">Place Order</a> -->
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+<!-- end check out section -->
+
+<%- include("../userLayouts/partials/userfooter.ejs") %>
+
+<script>
+
+    let radiobtns = document.querySelectorAll("input[name='coupon']")
+    let result = document.getElementById("hidden")
+     let findSelected = ()=>{
+        let selected = document.querySelector("input[name='coupon']:checked").value
+        result.value = selected
+     }
+    radiobtns.forEach(radiobtn =>{
+        radiobtn.addEventListener("change",findSelected)
+    })
+    
+
+
+    let rdbtns = document.querySelectorAll("input[name='optradio']")
+    let output = document.querySelector("#payment")
+    function selected() {
+         let selected = document.querySelector("input[name='optradio']:checked").value
+       
+         output.value = selected
+
+       }
+       rdbtns.forEach(x=>{
+        x.addEventListener('change',selected)
+       })
+
+       
+      
+   
+</script>
+
+<%- include("../userLayouts/footer.ejs") %>

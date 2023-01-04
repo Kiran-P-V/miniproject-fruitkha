@@ -1,0 +1,33 @@
+<%- include("../userLayouts/header.ejs") %>
+
+
+
+<div class="container-fluid">
+    <div class="container text-center">
+        <h1>Thank you.</h1>
+        <a class="lead w-lg-50 mx-auto " style="color: green; font-weight: 900;">Your order has been placed successfully.</a>
+    </div>
+    <div class="container">
+        <h2 class="h5 mb-5 text-center">You may also like these products <br><a href="/shop" class="cart-btn">Continue shopping</a></h2>
+        <div class="row ">
+            <%for(  let i=1;i<=product.length;i++){  %> 
+              <div class="col-lg-4 col-md-6 text-center">
+                <div class="single-product-item ">
+                  <div class="product-image">
+        
+                    <a href="/singleproduct?id=<%= product[i-1]._id %>"
+                      ><img src="/multerfiles/img/<%= product[i-1].image[0] %>" alt=""/>
+                    </a>
+                  </div>
+                  <h3><%= product[i-1].product %></h3>
+                  <p class="product-price"><span>Per Kg</span>Rs.<%= product[i-1].productprize %></p>
+                  <a href="/addToCart?id=<%= product[i-1]._id %>" class="cart-btn"
+                    ><i class="fas fa-shopping-cart"></i> Add to Cart</a>
+                </div>
+              </div>
+              <% } %> 
+            </div>
+         </div>
+    </div>
+
+ <%- include("../userLayouts/footer.ejs") %>

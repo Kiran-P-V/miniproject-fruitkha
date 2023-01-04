@@ -1,0 +1,56 @@
+<%- include("../adminLayouts/header.ejs") %> <%-
+include("../adminLayouts/partials/adminheader.ejs") %>
+<!-- <div class="col-12"> -->
+  <div style="margin-left: 16.5vw; width: 80vw;" class="  h-100 p-4 col-12  " >
+    <h3 class="mb-4">Orders list</h3>
+        <div class="table-responsive">
+      <table class="table">
+        <thead>
+          <tr>
+            <th scope="col">No</th>
+            <th scope="col"> Order id</th>
+            <th scope="col"> created Date</th>
+            <th scope="col">Final amount</th>  
+            <th scope="col">Status</th>
+            <th scope="col">Action</th>
+          </tr>
+          
+        </thead>
+        <tbody>
+          <% if(order.length>0){ %> <%for( let i=1;i<=order.length;i++){ %> 
+            
+            <tr>
+              <th scope="row"><%= i %></th>
+              <td><%= order[i-1]._id %></td>
+              <td><%= order[i-1].createdAt %></td>
+              <td>Rs.<%= order[i-1].products.totalPrice %></td>
+              <form action="" method="post">
+              <td>
+                <div class="dropdown">
+                    <select class="border-0" name="status" id="">
+                        <option><%= order[i-1].status %></option>
+                        <option >in progress</option>
+                        <option >Packed</option>
+                        <option >Shipped</option>
+                        <option >Delivered</option>
+                    </select>
+            </td>
+              <td>
+                <input type="hidden" name="id" value="<%=order[i-1]._id  %>">
+                <button type="submit"  class="btn btn-success">update</button>
+              </td>
+            </form>
+            </tr>
+            <% } } else{ %>
+              <tr>
+                <td colspan="5">Users Not Found</td>
+            </tr> 
+            <% } %>
+        </tbody>
+      </table>
+    </div>
+  </div>
+</div>
+
+<%- include("../adminLayouts/partials/adminfooter.ejs") %>
+<%- include("../adminLayouts/footer.ejs") %>

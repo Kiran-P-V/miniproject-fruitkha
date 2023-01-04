@@ -1,0 +1,142 @@
+<%- include("../adminLayouts/header.ejs") %> <%-
+include("../adminLayouts/partials/adminheader.ejs") %>
+
+<!-- <div class="col-12  bg-danger"> -->
+<div style="margin-left: 16.5vw; width: 80vw" class="h-100 p-4 col-12">
+  <h3 class="mb-4">List of Users</h3>
+  <div class="table-responsive">
+    <!-- search bar -->
+
+    <div class="input-group">
+      <div class="form-outline">
+        <input
+          type="text"
+          class="mr-3"
+          placeholder="Search here"
+          onkeyup="sendData(this)"
+        />
+        <section id="searchResults"></section>
+      </div>
+    </div>
+    <!-- search bar ends -->
+
+    <table class="table vw-80">
+      <thead>
+        <tr>
+          <th class="border-top-0">SI NO</th>
+          <th class="border-top-0">USER</th>
+          <th class="border-top-0">E-MAIL</th>
+          <th class="border-top-0">MOBILE NO</th>
+          <th class="border-top-0">ACTION</th>
+        </tr>
+      </thead>
+      <tbody>
+        <% if( users.length> 0){ %> <% for(let i=1;i <=users.length; i++){ %>
+        <tr>
+          <td><%= i %></td>
+
+          <td>
+            <div class="d-flex align-items-center">
+              <div class="">
+                <h6 class="m-b-0 font-16"><%= users[i-1].name %></h6>
+              </div>
+            </div>
+          </td>
+          <td><%= users[i-1].email %></td>
+          <td><%= users[i-1].tel %></td>
+          <td>
+            <!-- Default switch -->
+
+            <% if(users[i-1].isVerified) { %>
+
+            <a
+              class="btn-sm btn-info text-decoration-none btn-block"
+              href="/admin/block-user?id=<%= users[i-1]._id %> "
+              >Unblocked</a
+            >
+            <% } else { %>
+            <a
+              class="btn-sm btn-danger text-white text-decoration-none btn-block px-3"
+              href="/admin/block-user?id=<%= users[i-1]._id %>"
+              >blocked</a
+            >
+
+            <% } %>
+          </td>
+        </tr>
+        <% } } else{ %>
+        <tr>
+          <td colspan="5">Users Not Found</td>
+        </tr>
+        <% } %>
+      </tbody>
+    </table>
+    <nav aria-label="Page navigation example">
+      <ul class="pagination">
+        <li class="page-item">
+          <a class="page-link" href="#" aria-label="Previous">
+            <span aria-hidden="true">&laquo;</span>
+            <span class="sr-only">Previous</span>
+          </a>
+        </li>
+        <li class="page-item">
+          <a class="page-link" href="/admin/user/?page=1">1</a>
+        </li>
+        <li class="page-item">
+          <a class="page-link" href="/admin/user/?page=2">2</a>
+        </li>
+        <li class="page-item">
+          <a class="page-link" href="/admin/user/?page=3">3</a>
+        </li>
+        <li class="page-item">
+          <a class="page-link" href="#" aria-label="Next">
+            <span aria-hidden="true">&raquo;</span>
+            <span class="sr-only">Next</span>
+          </a>
+        </li>
+      </ul>
+    </nav>
+  </div>
+
+  <!-- </div> -->
+
+  <!-- script of search bar -->
+  <script>
+    function sendData(e) {
+      const searchResults = document.getElementById("searchResults");
+      let match = e.value.match(/^[a-zA-Z ]*$/);
+      let match2 = e.value.match(/\s*/);
+      if (match2[0] === e.value) {
+        searchResults.innerHTML = "";
+        return;
+      }
+      if (match[0] === e.value) {
+        fetch("getUsers", {
+          method: "POST",
+          headers: { "Content-Type": "application/json" },
+          body: JSON.stringify({ users: e.value }),
+        })
+          .then((res) => res.json())
+          .then((data) => {
+            let users = data.users;
+            searchResults.innerHTML = "";
+            if (users.length < 1) {
+              searchResults.innerHTML = "<p>Sorry. Nothing found</p>";
+              return;
+            }
+            users.forEach((item, index) => {
+              if (index > 0) searchResults.innerHTML += "<hr>";
+              searchResults.innerHTML += `<a href="/admin/singleUser?id=${item._id}" style="text-decoration: none;" > ${item.name} <\a>`;
+            });
+          });
+        return;
+      }
+      searchResults.innerHTML = "";
+    }
+  </script>
+  <!-- <a style="text-decoration: none;"></a> -->
+  <!-- script of search bar -->
+
+  <%- include("../adminLayouts/partials/adminfooter.ejs") %> <%-
+  include("../adminLayouts/footer.ejs") %>
+</div>

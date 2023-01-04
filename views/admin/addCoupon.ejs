@@ -1,0 +1,56 @@
+<%- include("../adminLayouts/header.ejs") %> 
+<%-include("../adminLayouts/partials/adminheader.ejs") %>
+
+<div class="container">
+  <h1 class="text-center m-3">Add Coupon</h1>
+  <div class="row justify-content-md-center">
+    <div class="col col-md-8 col-lg-6">
+    <form action="" method="post">
+  <!-- 2 column grid layout with text inputs for the first and last names -->
+  <div class="row mb-4">
+    <div class="col col-md-12">
+      <div class="form-outline">
+        <label class="form-label" for="form3Example1">Coupon Name</label>
+        <input type="text"  name="name" id="form3Example1" class="form-control" />
+      </div>
+    </div>
+    <div class="col col-md-6">
+      <div class="form-outline">
+        <label class="form-label" for="form3Example1">Value</label>
+        <input type="number" name="value" id="form3Example1" class="form-control" />
+      </div>
+    </div>
+    <div class="col col-md-6">
+      <div class="form-outline">
+        <label class="form-label" for="form3Example2">Coupon Code</label>
+        <input type="text" name="code" id="form3Example2" class="form-control" />
+      </div>
+    </div>
+    <div class="col">
+      <div class="form-outline">
+        <label class="form-label" for="form3Example2">Expiry Date</label>
+        <input type="date" name="expireDate" id="form3Example2" class="form-control" />
+      </div>
+    </div>
+    <div class="col">
+      <div class="form-outline">
+        <label class="form-label" for="form3Example2">Minimum Bill</label>
+        <input type="number" name="minbill" id="form3Example2" class="form-control" />
+      </div>
+    </div>
+  </div>
+
+  <!-- add button -->
+  <div class="form-outline">
+  <button type="submit" class="btn btn-primary btn-block mb-4">Add</button>
+</div>
+ 
+</form>
+</div>
+</div>
+ </h1>
+</div>
+
+<%-include("../adminLayouts/partials/adminfooter.ejs") %> 
+
+<%- include("../adminLayouts/footer.ejs") %>

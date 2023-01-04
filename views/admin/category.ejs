@@ -1,0 +1,76 @@
+<%- include("../adminLayouts/header.ejs") %>
+<%-include("../adminLayouts/partials/adminheader.ejs") %>
+
+<div class="container" style="width: 80vw; margin-bottom: 4rem">
+  <h1 class="text-center m-3">Add Category</h1>
+  <div class="row justify-content-md-center">
+    <div class="col col-md-8 col-lg-6">
+      <form action="" method="post" id="addProductForm">
+        <div class="form-group">
+          <label for="productName">Add Category</label>
+          <input
+            type="text"
+            class="form-control"
+            name="category"
+            id="productName"
+            placeholder="Category"
+            style="width: 25vw; position: absolute  ;"
+          />
+          <button
+            style="display: flex ; justify-content: flex-end ; position: relative; margin-left: 25rem;"
+            id="btnSubmit"
+            type="submit"
+            class="btn btn-primary"
+          >
+            Add
+          </button>
+        </div>
+        <% if(typeof message !== 'undefined'){%>
+
+        <h6 style="color: red"><%= message %></h6>
+        <%}%>
+      </form>
+    </div>
+  </div>
+</div>
+
+<!-- category table  -->
+<table class="table align-middle" style="width: 80vw; margin-left: 18rem">
+  <% if(typeof message !== 'undefined'){%>
+
+    <h6 style="color: red"><%= message %></h6>
+    <%}%>
+  <thead>
+    <tr>
+      <th scope="col">No</th>
+      <th scope="col">Categories</th>
+      <th scope="col">Action</th>
+    </tr>
+  </thead>
+  <tbody>
+    <% if( category.length> 0){ %> <% for(let i=1;i <=category.length; i++){ %>
+
+    <tr>
+      <td scope="row"><%= i %></td>
+      <td><%= category[i-1].category %></td>
+      <!-- <td>Amet</td> -->
+      <td>
+        <a
+          href="/admin/delete-category?id=<%= category[i-1]._id %> "
+          type="button"
+          class="btn btn-danger btn-sm px-3"
+        >
+          <i class="fas fa-times"></i>
+        </a>
+      </td>
+    </tr>
+    <% } } else{ %>
+    <tr>
+      <td colspan="5"><h6 style="color: red">No category exist</h6></td>
+    </tr>
+    <% } %>
+  </tbody>
+</table>
+
+<%-include("../adminLayouts/partials/adminfooter.ejs") %> <%-
+include("../adminLayouts/footer.ejs") %>

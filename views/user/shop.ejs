@@ -1,0 +1,325 @@
+<%- include("../userLayouts/header.ejs") %> <%-
+include("../userLayouts/partials/userheader.ejs") %>
+
+<!-- breadcrumb-section -->
+<div class="breadcrumb-section breadcrumb-bg">
+  <div class="container">
+    <div class="row">
+      <div class="col-lg-8 offset-lg-2 text-center">
+        <div class="breadcrumb-text">
+          <p>Fresh and Organic</p>
+          <h1>Shop</h1>
+ 
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+<!-- end breadcrumb section -->
+
+
+
+
+
+<!-- products -->
+<div class="product-section mt-150 mb-150">
+  <div class="container">
+
+
+
+
+    <div class="row">
+      <div class="col-md-12">
+        <div class="product-filters">
+          <ul>
+            <li class="active"  data-filter="*">All</li>
+            <%for(  let i=1;i<=category.length;i++){  %> 
+            <li  class="<%=path==='/shop'?'current-list-item active': ''%>" data-filter=".<%= category[i-1].category %> "><%= category[i-1].category %></li>
+            <% } %> 
+          </ul>
+        </div>
+      </div>
+    </div>
+
+
+         <!-- search bar starts -->
+
+         <div  class="container mb-5" >
+
+          <div  class="row d-flex justify-content-center ">
+
+            <div  class="col-md-6">
+
+                <div  class="card">
+                  
+                  <div class="input-box">
+                    <input style="border-radius: 40px;" type="text" placeholder="Search products" onkeyup="sendData(this)" class="form-control">
+                  </div>
+
+
+                  <div class="list border-bottom">
+
+                    <div class="d-flex flex-column ml-3">
+                      <section id="searchResults"></section> 
+                    </div>                   
+                  </div>
+
+                </div>
+              
+            </div>
+            
+          </div>
+          
+        </div>
+        <!-- search  bar ends  -->
+
+    <div class="row product-lists">
+      <% if(products.length>0){ %> <%for( let i=1;i<=products.length;i++){ %>
+      <div class="col-lg-4 col-md-6 text-center <%= products[i-1].category %>">
+        <div class="single-product-item">
+          <div class="product-image">
+            <a  href="/singleproduct?id=<%= products[i-1]._id %> "
+              ><img src="/multerfiles/img/<%= products[i-1].image[0] %>" alt=""
+            /></a>
+          </div>
+          <h3><%= products[i-1].product %></h3>
+          <s class="small text-danger">Rs.<%= products[i-1].productprize+50 %></s>
+          <p class="product-price">
+            <span>Per Kg</span>Rs.<%= products[i-1].productprize %>
+          </p>
+           <p class="product-price">
+            <span> 
+              <% if (products[i-1].stock === 0) { %>
+                <p style="color:rgb(241, 79, 79) ;">Out of Stock!</p>
+            <% } else if (products[i-1].stock <= 2 ) { %>
+                <p style="color: rgb(151, 151, 9) ;">Few more left</p>
+            <% } else { %>
+                <p style="color:rgb(0, 255, 0) ;">In stock</p>
+            <% } %>
+            </span>
+          </p>
+          <a href="/addToCart?id=<%= products[i-1]._id %>" class="cart-btn"
+            ><i class="fas fa-shopping-cart"></i> Add to Cart</a
+          >
+          <a  href="/addtowishlist?id=<%= products[i-1]._id %>" class="cart mt-4 align-items-center">
+            <!-- <button class="btn btn-danger text-uppercase mr-2 px-4" type="submit">
+                                  Add to cart
+                              </button>  -->
+            <i  class="fa fa-heart text-muted"></i>
+            <i class="fa fa-share-alt text-muted"></i>
+                            </a>
+        </div>
+      </div>
+      <% } } else{ %>
+      <tr>
+        <td colspan="5">Users Not Found</td>
+      </tr>
+      <% } %>
+    </div>
+
+    <div class="row">
+      <div class="col-lg-12 text-center">
+        <div class="pagination-wrap">
+          <ul>
+            <li><a href="#">Prev</a></li>
+            <li><a href="#">1</a></li>
+            <li><a class="active" href="#">2</a></li>
+            <li><a href="#">3</a></li>
+            <li><a href="#">Next</a></li>
+          </ul>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+<!-- end products -->
+
+<!-- logo carousel -->
+<div class="logo-carousel-section">
+  <div class="container">
+    <div class="row">
+      <div class="col-lg-12">
+        <div class="logo-carousel-inner">
+          <div class="single-logo-item">
+            <img src="assets/img/company-logos/1.png" alt="" />
+          </div>
+          <div class="single-logo-item">
+            <img src="assets/img/company-logos/2.png" alt="" />
+          </div>
+          <div class="single-logo-item">
+            <img src="assets/img/company-logos/3.png" alt="" />
+          </div>
+          <div class="single-logo-item">
+            <img src="assets/img/company-logos/4.png" alt="" />
+          </div>
+          <div class="single-logo-item">
+            <img src="assets/img/company-logos/5.png" alt="" />
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+<!-- end logo carousel -->
+
+<!-- search script  -->
+
+<script>
+  function sendData(e){
+      const searchResults= document.getElementById("searchResults")
+      let match = e.value.match(/^[a-zA-Z ]*$/);
+      let match2 = e.value.match(/\s*/);
+      if (match2[0] === e.value){
+          searchResults.innerHTML = '';
+          return;
+      }
+      if(match[0] === e.value){
+          fetch("getSearch",{
+          method: "POST",
+          headers: {"Content-Type": "application/json"},
+          body: JSON.stringify({products: e.value})
+      }).then(res=> res.json()).then(data=>{
+          let products= data.products;
+          console.log(products);
+          searchResults.innerHTML="";
+          if(products.length<1){
+              searchResults.innerHTML = "<p>Sorry. Nothing found</p>" 
+              return;
+          }
+          products.forEach((item,index) => {
+
+              if(index > 0)searchResults.innerHTML += "<hr>";
+              searchResults.innerHTML +=  `<a style="color: orange;" href="/singleProduct?id=${item._id}"> ${item.product} <\a>`
+
+          });
+      });
+      return;
+      }
+  }
+</script>
+
+<!-- image zoom scriptsss -->
+
+<script>
+  function change_image(image) {
+    var container = document.getElementById("main-image");
+
+    container.src = image.src;
+  }
+
+  document.addEventListener("DOMContentLoaded", function (event) {});
+</script>
+
+<script src="https://cdnjs.cloudflare.com/ajax/libs/elevatezoom/3.0.8/jquery.elevatezoom.min.js"></script>
+
+<script>
+  // Zoom images
+
+  // Add zoom-image class to the container of the image that you want to apply the zoom to.
+
+  jQuery(document).ready(function ($) {
+    $(".zoom-image img").click(function (event) {
+      var ix = $(this).offset().left;
+      var iy = $(this).offset().top;
+      console.log(ix + "-" + iy);
+
+      var mx = event.pageX;
+      var my = event.pageY;
+      console.log(mx + "-" + my);
+    });
+
+    $(".zoom-image img").hover(
+      function () {
+        var img = $(this).attr("src");
+
+        $(this).after(
+          "<div class='hover-image' style='background-image: url(" +
+            img +
+            "); background-size: 300px;'></div>"
+        );
+
+        $(this).mousemove(function (event) {
+          // Mouse Position
+          var mx = event.pageX;
+          var my = event.pageY;
+
+          // Image Position
+          var ix = $(this).offset().left;
+          var iy = $(this).offset().top;
+
+          // Mouse Position Relavtive to Image
+          var x = mx - ix;
+          var y = my - iy;
+
+          // Image Height and Width
+          var w = $(this).width();
+          var h = $(this).height();
+
+          // Mouse Position Relative to Image, in %
+          var xp = (-x / w) * -100;
+          var yp = (-y / h) * -100;
+
+          $(this)
+            .parent()
+            .find(".hover-image")
+            .attr(
+              "style",
+
+              "background-image: url(" +
+                img +
+                "); background-size: 1000px; background-repeat: no-repeat; background-position: " +
+                xp +
+                "% " +
+                yp +
+                "%; top: " +
+                y +
+                "px; left: " +
+                x +
+                "px;"
+            );
+        });
+      },
+      function () {
+        $(this).parent().find(".hover-image").remove();
+      }
+    );
+  });
+</script>
+
+<style>
+  .zoom-image-container {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+  }
+
+  .zoom-image {
+    position: relative;
+  }
+
+  .zoom-image img {
+    cursor: zoom-in;
+
+    /* box-shadow: 0 18px 5px -15px rgba( 0, 0, 0, .5 ); */
+  }
+
+  .hover-image {
+    position: fixed;
+    width: 300px;
+    height: 300px;
+
+    border-radius: 50%;
+
+    transform: translate(-0%, -20%);
+
+    pointer-events: none;
+
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.5);
+  }
+</style>
+
+<!-- end header -->
+
+<%- include("../userLayouts/footer.ejs") %> <%-
+include("../userLayouts/partials/userfooter.ejs") %>

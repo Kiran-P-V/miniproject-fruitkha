@@ -1,0 +1,164 @@
+<%- include("../adminLayouts/header.ejs") %> 
+<%- include("../adminLayouts/partials/adminheader.ejs") %>
+<!-- <div class="col-12"> -->
+  <div style="margin-left: 16.5vw; width: 80vw;" class="  h-100 p-4 col-12  " >
+    <h3 class="mb-4">List of Products</h3>
+    <a class="btn btn-primary ms-5" href="/admin/addCoupon">Add Coupon</a>
+    <div class="table-responsive">
+      <table class="table">
+        <thead>
+          <tr>
+            <th scope="col">No</th>
+            <th scope="col"> Coupon Name</th>
+            <th scope="col">Value</th>  
+            <th scope="col">Minimum Bill</th>
+            <th scope="col">Code</th>
+            <th scope="col">Action</th>
+          </tr>
+          
+        </thead>
+        <tbody>
+          <% if(coupon.length>=0){ %> <%for( let i=1;i<=coupon.length;i++){  %> 
+            
+            <tr>
+              <th scope="row"><%= i %></th>
+              <td><%= coupon[i-1].name %></td>
+              <td>Rs.<%= coupon[i-1].value %></td>
+              <td>Rs.<%= coupon[i-1].minbill %></td>
+              <td><%= coupon[i-1].code %></td>
+
+              <td>
+                <!-- Default switch -->
+
+                <% if(coupon[i-1].status==1) { %>
+                  <img
+                   src="https://img.icons8.com/external-tal-revivo-green-tal-revivo/36/null/external-enable-toggle-slider-isolated-in-white-background-setting-green-tal-revivo.png"
+                   data-bs-toggle="modal"
+                      data-bs-target="#model<%=coupon[i-1]._id  %>"
+                   />
+                  <!-- Modal -->
+                  <div
+                      class="modal fade"
+                      id="model<%=coupon[i-1]._id  %>"
+                      tabindex="-1"
+                      aria-labelledby="exampleModalLabel"
+                      aria-hidden="true"
+                  >
+                      <div class="modal-dialog">
+                          <div class="modal-content">
+                              <div
+                                  class="modal-header"
+                              >
+                                  <button
+                                      type="button"
+                                      class="btn-close"
+                                      data-bs-dismiss="modal"
+                                      aria-label="Close"
+                                  ></button>
+                              </div>
+                              <div
+                                  class="modal-body text-center"
+                              >
+                                  <p>
+                                      Do you want to
+                                      inactivate
+                                      <%=coupon[i-1].name
+                                      %>?
+                                  </p>
+                              </div>
+                              <div
+                                  class="modal-footer"
+                              >
+                                  <button
+                                      type="button"
+                                      class="btn btn-secondary"
+                                      data-bs-dismiss="modal"
+                                  >
+                                      Cancel
+                                  </button>
+
+                                  <a
+                                      href="/admin/activateCoupons?id=<%= coupon[i-1]._id %> "
+                                      class="btn btn-danger text-decoration-none"
+                                      >Done</a
+                                  >
+                              </div>
+                          </div>
+                      </div>
+                  </div>
+                  <!-- modal end -->
+                  <% } else { %>
+                  <img 
+                  src="https://img.icons8.com/external-tal-revivo-duo-tal-revivo/25/null/external-enable-toggle-slider-isolated-in-white-background-setting-duo-tal-revivo.png"
+                  data-bs-toggle="modal"
+                      data-bs-target="#model<%=coupon[i-1]._id  %>"
+                  />
+
+                  <!-- Modal -->
+                  <div
+                      class="modal fade"
+                      id="model<%=coupon[i-1]._id  %>"
+                      tabindex="-1"
+                      aria-labelledby="exampleModalLabel"
+                      aria-hidden="true"
+                  >
+                      <div class="modal-dialog">
+                          <div class="modal-content">
+                              <div
+                                  class="modal-header"
+                              >
+                                  <button
+                                      type="button"
+                                      class="btn-close"
+                                      data-bs-dismiss="modal"
+                                      aria-label="Close"
+                                  ></button>
+                              </div>
+                              <div
+                                  class="modal-body text-center"
+                              >
+                                  <p>
+                                      Do you want to
+                                      Activate
+                                      <%=coupon[i-1].name
+                                      %>?
+                                  </p>
+                              </div>
+                              <div
+                                  class="modal-footer"
+                              >
+                                  <button
+                                      type="button"
+                                      class="btn btn-secondary"
+                                      data-bs-dismiss="modal"
+                                  >
+                                      Cancel
+                                  </button>
+
+                                  <a
+                                      href="/admin/activateCoupons?id=<%= coupon[i-1]._id %> "
+                                      class="btn btn-success text-decoration-none"
+                                      >Done</a
+                                  >
+                              </div>
+                          </div>
+                      </div>
+                  </div>
+                  <!-- modal end -->
+
+                  <% } %>
+              </td>
+          </tr>
+          <%}}else{%>
+          <tr>
+              <td>Coupon not found</td>
+          </tr>
+          <%}%>
+        </tbody>
+      </table>
+    </div>
+  </div>
+</div>
+
+<%- include("../adminLayouts/partials/adminfooter.ejs") %>
+<%- include("../adminLayouts/footer.ejs") %>

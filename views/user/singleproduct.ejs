@@ -1,0 +1,158 @@
+<%- include("../userLayouts/header.ejs") %> <%-
+include("../userLayouts/partials/userheader.ejs") %>
+
+<!-- breadcrumb-section -->
+<div class="breadcrumb-section breadcrumb-bg">
+  <div class="container">
+    <div class="row">
+      <div class="col-lg-8 offset-lg-2 text-center">
+        <div class="breadcrumb-text">
+          <p>See more Details</p>
+          <h1>Single Product</h1>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+<!-- end breadcrumb section -->
+
+
+
+<!-- image zoom trial try  -->
+
+<div class="container mt-5 mb-5">
+  <div class="row d-flex justify-content-center">
+    <div class="col-md-10">
+      <div class="card">
+        <div class="row">
+          <div class="col-md-6">
+            <div class="images p-3">
+              
+              <a href="/multerfiles/img/<%= product.image[1] %>"  class="MagicZoom" id="motorbike" data-options="selectorTrigger: hover; transitionEffect: false"><img  src="/multerfiles/img/<%= product.image[1] %> "id="main-image"></a>
+             
+               <div
+                class="thumbnail text-center"
+                style="height: 5rem; margin-top: 1rem" >
+                <a data-zoom-id="motorbike" href="/multerfiles/img/<%= product.image[0] %>" data-image="/multerfiles/img/<%= product.image[0] %>"><img style="height: 5rem; margin-left: 1rem" onclick="change_image(this)" src="/multerfiles/img/<%= product.image[0] %>"></a>
+                <a data-zoom-id="motorbike" href="/multerfiles/img/<%= product.image[1] %>" data-image="/multerfiles/img/<%= product.image[1] %>"><img style="height: 5rem; margin-left: 1rem" onclick="change_image(this)" src="/multerfiles/img/<%= product.image[1] %>"></a>
+                <a data-zoom-id="motorbike" href="/multerfiles/img/<%= product.image[2] %>" data-image="/multerfiles/img/<%= product.image[2] %>"><img style="height: 5rem; margin-left: 1rem" onclick="change_image(this)" src="/multerfiles/img/<%= product.image[2] %>"></a>
+              </div>
+            </div>
+          </div>
+          <div class="col-md-6">
+            <div class="product p-4">
+              <div class="d-flex justify-content-between align-items-center">
+                <div class="d-flex align-items-center">
+                  <i class="fa fa-long-arrow-left"></i>
+                  <a href="/shop">
+                    <span class="ml-1" style="margin-left: 10px">Back</span></a
+                  >
+                </div>
+                <!-- <a href=""><i class="fa fa-shopping-cart"></i></a> -->
+              </div>
+              <div class="mt-4 mb-3">
+                <span class="text-uppercase text-muted brand"></span>
+                <h5 class="text-uppercase"><%= product.product %></h5>
+
+                <div class="d-flex" style="height: 5rem">
+                  <p class="small" style="font-size: 22px">
+                    <%= product.category %>
+                  </p>
+                  <p
+                    class="small text-danger"
+                    style="margin-top: 3rem; margin-left: -3.3rem"
+                  >
+                    <s>Rs.<%=  product.productprize+50 %></s>
+                  </p>
+                </div>
+                <div class="price d-flex flex-row align-items-center">
+                  <span class="act-price"
+                    >&#8377; Rs.<%=  product.productprize %></span
+                  >
+                  <div class="ml-2"></div>
+                </div>
+                <% if (product.stock === 0) { %>
+                  <p style="color:rgb(241, 79, 79) ;">Out of Stock!</p>
+              <% } else if (product.stock <= 2 ) { %>
+                  <p style="color: rgb(151, 151, 9) ;">Few more left</p>
+              <% } else { %>
+                  <p style="color:rgb(0, 255, 0) ;">In stock</p>
+              <% } %>
+              </div>
+              <p class="about"><%= product.description %></p>
+              <a href="/addToCart?id=<%= product._id %>" class="cart-btn"
+              ><i class="fas fa-shopping-cart"></i> Add to Cart</a
+            >
+                <a  href="/addtowishlist?id=<%= product._id %>" class="cart mt-4 align-items-center">
+                  <!-- <button class="btn btn-danger text-uppercase mr-2 px-4" type="submit">
+                                        Add to cart
+                                    </button>  -->
+                  <i  class="fa fa-heart text-muted"></i>
+                  <i class="fa fa-share-alt text-muted"></i>
+                                  </a>
+              
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+
+
+<!-- image zoom trial try  -->
+
+ 
+
+
+
+
+<!-- logo carousel -->
+<div class="logo-carousel-section">
+  <div class="container">
+    <div class="row">
+      <div class="col-lg-12">
+        <div class="logo-carousel-inner">
+          <div class="single-logo-item">
+            <img src="assets/img/company-logos/1.png" alt="" />
+          </div>
+          <div class="single-logo-item">
+            <img src="assets/img/company-logos/2.png" alt="" />
+          </div>
+          <div class="single-logo-item">
+            <img src="assets/img/company-logos/3.png" alt="" />
+          </div>
+          <div class="single-logo-item">
+            <img src="assets/img/company-logos/4.png" alt="" />
+          </div>
+          <div class="single-logo-item">
+            <img src="assets/img/company-logos/5.png" alt="" />
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+<!-- end logo carousel -->
+
+<!-- image zooming script -->
+</script>
+
+<!-- image zoom scriptsss -->
+
+<script>
+  function change_image(image) {
+    var container = document.getElementById("main-image");
+    container.src = image.src;
+    image.parentElement.parentElement.children[0].children[0].setAttribute('href',`${image.src}`)
+    image.parentElement.parentElement.children[0].children[0].children[0].setAttribute('src',`${image.src}`)
+  }
+
+  // document.addEventListener("DOMContentLoaded", function (event) {});
+</script>
+
+<script src="https://cdnjs.cloudflare.com/ajax/libs/elevatezoom/3.0.8/jquery.elevatezoom.min.js"></script>
+
+<%- include("../userLayouts/footer.ejs") %> <%-
+include("../userLayouts/partials/userfooter.ejs") %>

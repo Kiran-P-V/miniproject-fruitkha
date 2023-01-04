@@ -1,0 +1,69 @@
+<%- include("../adminLayouts/header.ejs") %> 
+<%-include("../adminLayouts/partials/adminheader.ejs") %>
+
+<div class="container">
+  <h1 class="text-center m-3">Add Product</h1>
+
+  <div class="row justify-content-md-center">
+    <div class="col col-md-8 col-lg-6">
+    <form action="" method="post" enctype="multipart/form-data">
+      <% if(typeof message !== 'undefined'){%>
+
+        <h4 style="color: #25db14"><%= message %></h4>
+        <%}%>
+  <div class="row mb-4">
+    <div class="col">
+      <div class="form-outline">
+        <label class="form-label" for="form3Example1">Product Name</label>
+        <input type="text"  name="product" id="form3Example1" class="form-control" />
+      </div>
+    </div>
+    <div class="col">
+      <div class="form-outline">
+        <label class="form-label" for="form3Example1">prize</label>
+        <input type="text" name="productprize" id="form3Example1" class="form-control" />
+      </div>
+    </div>
+    <div class="col">
+      <div class="form-outline">
+        <label class="form-label" for="form3Example2">Stock</label>
+        <input type="text" name="stock" id="form3Example2" class="form-control" />
+      </div>
+    </div>
+    <div class="form-outline">
+      <label class="form-label" for="textAreaExample">descreption</label>
+      <input class="form-control" name="descreption" style="height: 20vh;"  id="textAreaExample" rows="4"></input>
+    </div>  
+  </div>
+
+  <div class="col">
+    <div class="form-outline">
+      <label class="form-label" for="form3Example2">Category</label>
+      <select type="text" name="category" id="form3Example2" class="form-control">
+        <option selected disabled>Choose the category ...</option>
+         <% category.forEach(category=>{ %>
+        <option value="<%= category.category %>">
+            <%= category.category %>
+        </option>
+        <% }) %>
+    </option>  </select>
+    </div>
+  </div>
+  <!-- image input -->
+  <label for="formFileMultiple" class="form-label">Add Images</label>
+  <input class="form-control mb-4" accept="image/png, image/gif , image/jpeg" name="uploaded_file" type="file" id="formFileMultiple" multiple />
+
+  <!-- add button -->
+  <div class="form-outline">
+  <button type="submit" class="btn btn-primary btn-block mb-4">Add</button>
+</div>
+ 
+</form>
+</div>
+</div>
+ </h1>
+</div>
+
+<%-include("../adminLayouts/partials/adminfooter.ejs") %> 
+
+<%- include("../adminLayouts/footer.ejs") %>

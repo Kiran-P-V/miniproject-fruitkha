@@ -1,0 +1,112 @@
+<!-- Spinner Start -->
+<div
+  id="spinner"
+  class="show bg-white position-fixed translate-middle w-100 vh-100 top-50 start-50 d-flex align-items-center justify-content-center"
+>
+  <div
+    class="spinner-border text-primary"
+    style="width: 3rem; height: 3rem"
+    role="status"
+  >
+    <span class="sr-only">Loading...</span>
+  </div>
+</div>
+<!-- Spinner End -->
+
+<!-- Sidebar Start -->
+<div class="sidebar pe-4 pb-3 bg-light">
+  <nav class="navbar bg-light navbar-light">
+    <a href="index.html" class="navbar-brand mx-4 mb-3">
+      <h3 class="text-primary"><i class="fa fa-hashtag me-2"></i>DASHMIN</h3>
+    </a>
+    <div class="d-flex align-items-center ms-4 mb-4">
+      <div class="position-relative">
+        
+      
+          <span class="blink">  <div
+            class="bg-success rounded-circle border border-2 border-white position-absolute end-0 bottom-0 p-1"
+            ></div></span>
+      </div>
+      <div class="ms-3">
+        <h6 class="mb-0">Kiran PV</h6>
+        <span>Admin</span>
+      </div>
+    </div>
+    <div class="navbar-nav w-100">
+      <a
+        href="/admin"
+        class="nav-item nav-link <%=path==='/admin'?'active': ''%>"
+        ><i class="fa fa-tachometer-alt me-2"></i>Dashboard</a
+      >
+      <div class="nav-item dropdown">
+        <div class="dropdown-menu bg-transparent border-0">
+          <a href="button.html" class="dropdown-item">Buttons</a>
+          <a href="typography.html" class="dropdown-item">Typography</a>
+          <a href="element.html" class="dropdown-item">Other Elements</a>
+        </div>
+      </div>
+      <a
+        href="/admin/user"
+        class="nav-item nav-link <%=path==='/admin/user'?'active': ''%>"
+        ><i class="fa fa-th me-2"></i>Users</a
+      >
+      <a
+        href="/admin/products"
+        class="nav-item nav-link <%=path==='/admin/products'?'active': ''%>"
+        ><i class="fa fa-keyboard me-2"></i>Products</a
+      >
+      <a
+        href="/admin/coupon"
+        class="nav-item nav-link <%=path==='/admin/coupon'?'active': ''%>"
+        ><i class="fa fa-table me-2"></i>Coupons</a
+      >
+      <a
+        href="/admin/category"
+        class="nav-item nav-link <%=path==='/admin/category'?'active': ''%>"
+        ><i class="fa fa-chart-bar me-2"></i>Category</a
+      >
+      <a href="/admin/orders" class="nav-item nav-link <%=path==='/admin/orders'?'active': ''%>"
+        ><i class="fa fa-chart-bar me-2"></i>Orders</a
+      >
+      <a
+        href="/admin/banner"
+        class="nav-item nav-link <%=path==='/admin/banner'?'active': ''%>"
+        ><i class="fa fa-chart-bar me-2"></i>Banners</a
+      >
+      <a
+        href="/admin/logout"
+        style="
+          color: rgb(252, 48, 48);
+          font-size: larger;
+          background-color: rgb(15, 132, 249);text-align: center;
+        "
+        class="nav-item nav-link <%=path=='/admin/logout'?'active':''%>"
+        >logout</a
+      >
+      <div class="nav-item dropdown">
+        <div class="dropdown-menu bg-transparent border-0"></div>
+      </div>
+    </div>
+  </nav>
+</div>
+<!-- Sidebar End -->
+<style>
+
+  
+/* Blink for Webkit and others
+(Chrome, Safari, Firefox, IE, ...)
+*/
+
+@-webkit-keyframes blinker {
+  from {opacity: 1.0;}
+  to {opacity: 0.0;}
+}
+.blink{ 
+	text-decoration: blink;
+	-webkit-animation-name: blinker;
+	-webkit-animation-duration: 0.6s;
+	-webkit-animation-iteration-count:infinite;
+	-webkit-animation-timing-function:ease-out;
+	-webkit-animation-direction: alternate;
+}
+</style>

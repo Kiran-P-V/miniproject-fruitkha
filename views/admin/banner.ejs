@@ -1,0 +1,93 @@
+<%- include("../adminLayouts/header.ejs") %> <%-
+include("../adminLayouts/partials/adminheader.ejs") %>
+<div class="container">
+    <h1 class="text-center m-3">Banner Controls</h1>
+    <div class="row justify-content-md-center">
+      <div class="col col-md-8 col-lg-6">
+      <form action="" method="post" enctype="multipart/form-data">
+    <!-- 2 column grid layout with text inputs for the first and last names -->
+    <div class="row mb-4">
+      <div class="col">
+        <div class="form-outline">
+          <label class="form-label" for="form3Example1">Banner Name</label>
+          <input type="text"  name="name" id="form3Example1" class="form-control" />
+        </div>
+      </div>
+    </div>
+
+    <!-- image input -->
+
+    <label for="formFileMultiple" class="form-label">Add Banner</label>
+    <input class="form-control mb-4" name="uploaded_file" type="file" id="formFileMultiple" multiple />
+  
+    <!-- add button -->
+    <div class="form-outline">
+    <button type="submit" class="btn btn-primary btn-block mb-4">Add</button>
+  </div>
+   
+  </form>
+  </div>
+  </div>
+   </h1>
+  </div>
+
+
+<!-- <div class="col-12"> -->
+  <div style="margin-left: 16.5vw; width: 80vw;" class="  h-100 p-4 col-12  " >
+    <div class="table-responsive">
+      <table class="table">
+        <thead>
+          <tr>
+            <th scope="col">No</th>
+            <th scope="col"> Name</th>
+            <th scope="col">Banner 1</th>
+            <th scope="col">Banner 2</th>
+            <th scope="col">Banner 3</th>
+
+
+            <th scope="col">Action</th>
+          </tr>
+          
+        </thead>
+        <tbody>
+          <% if(banner.length>0){ %> <%for( let i=1;i<=banner.length;i++){  %> 
+            
+            <tr>
+              <th scope="row"><%= i %></th>
+              <td><%= banner[i-1].name %></td>              
+              <td><img src="/multerfiles/img/<%= banner[i-1].image[0] %>" style="width:9vw;height: 5vh;"></td>
+              <td><img src="/multerfiles/img/<%= banner[i-1].image[1] %>" style="width:9vw;height: 5vh;"></td>
+              <td><img src="/multerfiles/img/<%= banner[i-1].image[2] %>" style="width:9vw;height: 5vh;"></td>
+
+
+              <td>
+                <% if(banner[i-1].active) { %>
+
+                  <a
+                    class="btn-sm btn-info text-decoration-none btn-block px-3"
+                    href="/admin/bannerAction?id=<%= banner[i-1]._id %>"
+                    >Enabled</a
+                  >
+                  <% } else { %>
+                  <a
+                    class="btn-sm btn-danger text-white text-decoration-none btn-block px-3"
+                    href="/admin/bannerAction?id=<%= banner[i-1]._id %>"
+                    >Disabled</a
+                  >
+      
+                  <% } %>
+              </td>
+            </tr>
+            <% } } else{ %>
+              <tr>
+                <td colspan="5">No Banner Found</td>
+            </tr>
+            <% } %>
+        </tbody>
+      </table>
+    </div>
+  </div>
+</div>
+
+<%- include("../adminLayouts/partials/adminfooter.ejs") %>
+<%- include("../adminLayouts/footer.ejs") %>

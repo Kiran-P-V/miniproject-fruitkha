@@ -1,0 +1,64 @@
+<%- include("../adminLayouts/header.ejs") %> 
+<link rel="stylesheet" href="">
+<link rel="stylesheet" href="">
+<script src=""></script>
+<script src=""></script>
+<%- include("../adminLayouts/partials/adminheader.ejs") %>
+<!-- <div class="col-12"> -->
+  <div style="margin-left: 16.5vw; width: 80vw;" class="  h-100 p-4 col-12  " >
+    <h3 class="mb-4">List of Products</h3>
+    <a class="btn btn-primary ms-5" style="display: flex; width: 10vw;" href="/admin/addProducts">Add Products</a>
+    <div class="table-responsive">
+      <table class="table">
+        <thead>
+          <tr>
+            <th scope="col">No</th>
+            <th scope="col"> Product</th>
+            <th scope="col">prize</th>  
+            <th scope="col">Status</th>
+            <th scope="col">Stock</th>
+            <th scope="col">Catagory</th>
+            <th scope="col">Image</th>
+            <th scope="col">Action</th>
+          </tr>
+          
+        </thead>
+        <tbody>
+          <% if(products.length>0){ %> <%for( let i=1;i<=products.length;i++){  %> 
+            
+            <tr>
+              <th scope="row"><%= i %></th>
+              <td><%= products[i-1].product %></td>
+              <td>Rs.<%= products[i-1].productprize %></td>
+              <td>
+                  <% if (products[i-1].stock === 0) { %>
+                    <p style="color:rgb(241, 79, 79) ;">Out of Stock!</p>
+                <% } else if (products[i-1].stock <= 2 ) { %>
+                    <p style="color: rgb(151, 151, 9) ;">Few more left</p>
+                <% } else { %>
+                    <p style="color:rgb(0, 255, 0) ;">In stock</p>
+                <% } %>
+                  
+              </td>
+              <td><%= products[i-1].stock %>kg</td>
+              <td><%= products[i-1].category %></td>
+              <td><img src="/multerfiles/img/<%= products[i-1].image[0] %>" id="image" style="width:3vw;height: 7vh;"></td>
+              <td>
+                <a href="/admin/editproduct?id=<%= products[i-1]._id %>  " style="margin-left: 10px ;" class="bi bi-pencil-square"></a>
+                <a href="/admin/deleteproduct?id=<%= products[i-1]._id %> "style="margin-left: 10px ;" class="bi bi-trash-fill"></a>
+              </td>
+              
+            </tr>
+            <% } } else{ %>
+              <tr>
+                <td colspan="5">Users Not Found</td>
+            </tr> 
+            <% } %>
+        </tbody>
+      </table>
+    </div>
+  </div>
+</div>
+
+<%- include("../adminLayouts/partials/adminfooter.ejs") %>
+<%- include("../adminLayouts/footer.ejs") %>
